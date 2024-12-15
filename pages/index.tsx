@@ -20,6 +20,8 @@ import {
   RocketLaunchIcon
 } from '@heroicons/react/24/outline'
 import Footer from '@/components/Footer'
+import { useState } from 'react'
+import WaitlistModal from '@/components/WaitlistModal'
 
 // Animation variants for features
 const containerVariants = {
@@ -120,6 +122,8 @@ const BenefitCard = ({ icon: Icon, title, description }: {
 )
 
 export default function Home() {
+  const [isWaitlistModalOpen, setIsWaitlistModalOpen] = useState(false);
+
   return (
     <div className="min-h-screen flex flex-col bg-[#0B1015] text-white">
       <Header />
@@ -183,6 +187,7 @@ export default function Home() {
             className="flex justify-center"
           >
             <button 
+              onClick={() => setIsWaitlistModalOpen(true)}
               className="group relative px-8 py-4 bg-[#00AEEF] text-white rounded-full font-semibold text-lg
                 shadow-lg hover:bg-[#0098d1] transform hover:scale-105 transition-all duration-300
                 hover:shadow-[#00AEEF]/20 hover:shadow-xl"
@@ -321,6 +326,11 @@ export default function Home() {
       </section>
 
       <Footer />
+
+      <WaitlistModal 
+        isOpen={isWaitlistModalOpen}
+        onClose={() => setIsWaitlistModalOpen(false)}
+      />
     </div>
   )
 }
